@@ -6,9 +6,9 @@ app = Flask(__name__)
 @app.route('/')
 def Index():
     newsapi = NewsApiClient(api_key="3ecb0d19c3c24ba6a9ae749c20178705")
-    topheaddlines = newsapi.get_top_headlines(sources="abc-news")
+    topheadlines = newsapi.get_top_headlines(sources="abc-news")
 
-    articles = topheaddlines['articles']
+    articles = topheadlines['articles']
 
     desc = []
     news = []
@@ -24,7 +24,7 @@ def Index():
         img.append(myarticles['urlToImage'])
         url.append(myarticles['url'])
         publAt.append(myarticles['publishedAt'])
-
+        
 
     mylist = zip(news, desc, img,url,publAt)
 
@@ -55,7 +55,7 @@ def bbc():
     mylist = zip(news, desc, img,url,publAt)
 
 
-    return render_template('bbc.html', context = mylist)
+    return render_template('bbc.html', context = mylist)  
 @app.route('/fox')
 def fox():
     newsapi = NewsApiClient(api_key="3ecb0d19c3c24ba6a9ae749c20178705")
@@ -85,7 +85,7 @@ def fox():
 @app.route('/nbc')
 def nbc():
     newsapi = NewsApiClient(api_key="3ecb0d19c3c24ba6a9ae749c20178705")
-    topheadlines = newsapi.get_top_hedlines(sources="nbc-news")
+    topheadlines = newsapi.get_top_headlines(sources="nbc-news")
 
     articles = topheadlines['articles']
 
@@ -98,17 +98,18 @@ def nbc():
     for i in range(len(articles)):
         myarticles = articles[i]
 
-        news.apppend(myarticles['title'])
-        desc.append(myarticles)['description'])
+        news.append(myarticles['title'])
+        desc.append(myarticles['description'])
         img.append(myarticles['urlToImage'])
-        url.append(myarticles)['url'])
-        publAt.append(myarticles)['publishedAt'])
+        url.append(myarticles['url'])
+        publAt.append(myarticles['publishedAt'])
 
-    mylist = zip(news, desc,img,url,publAt)
+    mylist = zip(news, desc, img,url,publAt)
 
 
     return render_template('nbc.html', context = mylist)
-
-if __name__ =="__main__":
+    
+if __name__ == "__main__":
     app.run(debug=True)
     app.run
+      
